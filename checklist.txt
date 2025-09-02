@@ -1,0 +1,56 @@
+1.Design Phase
+Write out instruction set (ISA) with opcodes + operands
+Document how instructions are encoded in binary (e.g., 1 byte opcode + 1–2 bytes operands)
+
+2.Core Emulator
+Create memory array in C++
+Create struct/class for CPU (holds registers, flags, PC, SP)
+Implement fetch–decode–execute loop
+Implement data movement instructions (MOV, LOAD, STORE)
+Implement arithmetic/logic instructions (ADD, SUB, MUL, DIV, AND, OR, XOR, NOT)
+Implement control flow (JMP, JZ, JNZ, HLT)
+
+3.Assembler (Basic)
+Write a parser that reads assembly text
+Map mnemonics (MOV, ADD, etc.) to opcodes
+Handle registers and immediate values
+Output machine code (binary/bytecode file)
+Test with a simple program (e.g., add two numbers)
+
+4.Program Loader
+Write a function to load binary file into emulator memory
+Set PC = 0 at start
+Run program via fetch–decode–execute
+
+5.Stack Support
+Implement PUSH and POP
+Implement CALL (push PC, jump to function)
+Implement RET (pop PC)
+Test with recursive program (e.g., factorial)
+
+6.Debugger Mode
+Add step-by-step execution (--debug flag)
+Print registers + memory state after each instruction
+Add breakpoints (BREAK address)
+
+7.I/O System
+Implement IN Rn (read integer from stdin)
+Implement OUT Rn (print integer to stdout)
+Test with simple interactive program (e.g., calculator)
+
+8.Assembler Enhancements
+Add support for labels (instead of raw addresses)
+Add support for comments
+Add error messages for invalid instructions
+
+9.Testing Programs
+Write assembly program for Fibonacci sequence
+Write assembly program for factorial
+Write assembly program for summing an array
+Write assembly program that uses branching + loops
+
+10.Optional Stretch Features
+Add GUI (registers + memory view)
+Implement interrupts (keyboard handler)
+Optimize with JIT instruction caching
+Write a tiny “OS” in your assembly (basic scheduler, I/O)

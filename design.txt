@@ -1,0 +1,8 @@
+Registers:
+R0-R15
+PC
+SP
+FLAGS(ZF, SF, CF, OF)
+
+Memory Size: 64KB
+
