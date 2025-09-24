@@ -6,3 +6,73 @@ FLAGS(ZF, SF, CF, OF)
 
 Memory Size: 64KB
 
+Instruction Encoding Specification
+
+This document defines how instructions in the custom CPU architecture are stored in memory. Instructions are represented as sequences of bytes. The first byte is always the opcode, and additional bytes encode operands depending on the instruction type.
+
+---
+
+General Rules:
+
+1. Opcode
+
+   * Size: 1 byte
+   * Identifies the instruction. Example: 0x10 = ADD.
+2. Registers
+
+   * Size: 1 byte
+   * Value represents a register index (0x00 = R0, 0x01 = R1, ...).
+   * Typically only 8 registers (R0-R7) are used.
+3. Immediate Values
+
+   * Size: 2 bytes
+   * Stored in little-endian format (low byte first).
+   * Example: 10 = 0x0A 0x00.
+4. Memory Addresses
+
+   * Size: 2 bytes
+   * Stored in little-endian format.
+   * Allows addressing up to 64 KB of memory.
+
+---
+
+Instruction Formats:
+
+1. No Operand Instructions
+   Format: \[ OPCODE ]
+   Example: HLT -> 65
+
+2. Register-to-Register Instructions
+   Format: \[ OPCODE | Rdest | Rsrc ]
+   Example: MOV R1, R2 -> 01 01 02
+
+3. Register + Immediate Instructions
+   Format: \[ OPCODE | Rdest | IMM\_lo | IMM\_hi ]
+   Example: MOV R1, 10 -> 02 01 0A 00
+
+4. Memory Access Instructions
+
+* Load into register: \[ OPCODE | Rdest | ADDR\_lo | ADDR\_hi ]
+  Example: LOAD R1, \[200] -> 03 01 C8 00
+* Store from register: \[ OPCODE | Rsrc | ADDR\_lo | ADDR\_hi ]
+  Example: STORE R2, \[300] -> 04 02 2C 01
+
+5. Arithmetic / Logic Instructions
+   Format: \[ OPCODE | Rdest | Rsrc ]
+   Example: ADD R1, R2 -> 10 01 02
+
+6. Jump / Control Flow Instructions
+   Format: \[ OPCODE | ADDR\_lo | ADDR\_hi ]
+   Example: JMP 400 -> 60 90 01
+
+---
+
+Encoding Summary Table:
+
+Type                  | Format                              | Example (Assembly)| Example (Bytes)
+----------------------|-------------------------------------|-------------------|----------------
+No operand            | [OPCODE]                            | HLT               | 65
+Register-to-Register  | [OPCODE | Rdest | Rsrc]             | MOV R1, R2        | 01 01 02
+Register + Immediate  | [OPCODE | Rdest | IMM_lo | IMM_hi]  | MOV R1, 10        | 02 01 0A 00
+Register + Address    | [OPCODE | Rreg | ADDR_lo | ADDR_hi] | LOAD R1, [200]    | 03 01 C8 00
+Jump                  | [OPCODE | ADDR_lo | ADDR_hi]        | JMP 400           | 60 90 01

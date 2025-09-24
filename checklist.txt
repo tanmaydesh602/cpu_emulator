@@ -1,5 +1,4 @@
 1.Design Phase
-Write out instruction set (ISA) with opcodes + operands
 Document how instructions are encoded in binary (e.g., 1 byte opcode + 1–2 bytes operands)
 
 2.Core Emulator
