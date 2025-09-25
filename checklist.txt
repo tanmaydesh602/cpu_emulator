@@ -1,8 +1,4 @@
-1.Design Phase
-Document how instructions are encoded in binary (e.g., 1 byte opcode + 1–2 bytes operands)
-
 2.Core Emulator
-Create memory array in C++
 Create struct/class for CPU (holds registers, flags, PC, SP)
 Implement fetch–decode–execute loop
 Implement data movement instructions (MOV, LOAD, STORE)
