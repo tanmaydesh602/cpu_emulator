@@ -1,5 +1,4 @@
 2.Core Emulator
-Create struct/class for CPU (holds registers, flags, PC, SP)
 Implement fetch–decode–execute loop
 Implement data movement instructions (MOV, LOAD, STORE)
 Implement arithmetic/logic instructions (ADD, SUB, MUL, DIV, AND, OR, XOR, NOT)
